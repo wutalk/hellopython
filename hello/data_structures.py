@@ -39,3 +39,16 @@ for i, v in tel.iteritems():
     print i, v
 
 print('hello {}!'.format('owen'))
+
+def divide(x,y):
+    try:
+        result = x/y
+    except ZeroDivisionError:
+        print('division by zero')
+    else:
+        print("result is {}".format(result))
+    finally:
+        print('in finally')
+
+divide(1,2)
+divide(1,0)
