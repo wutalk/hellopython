@@ -16,5 +16,7 @@ if __name__ == "__main__":
     if sys.argv.__len__() >= 2:
         alg = sys.argv[1]
     origin_text = getpass.getpass('Input: ')
-    # print(input + ", " + alg)
+    if sys.argv.__len__() >= 3:
+        if sys.argv[2] == 'show':
+            print(origin_text + ", " + alg)
     print(digest(origin_text, alg))
