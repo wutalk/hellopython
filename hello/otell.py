@@ -20,3 +20,6 @@ if __name__ == "__main__":
         if sys.argv[2] == 'show':
             print(origin_text + ", " + alg)
     print(digest(origin_text, alg))
+    # waiting
+    print("Enter to exit")
+    raw_input()
