@@ -14,16 +14,24 @@ shutil.copyfile('d:/tmp/test.log.2', 'd:/tmp/test.log')
 # shutil.move('d:/tmp/test.log','d:/')
 
 # parse html
-# f = open('D:/tmp/about_baidu.html', 'r')
-f = open('D:/tmp/csi_price.html', 'r')
+f = open('D:/tmp/about_baidu.html', 'r')
+# f = open('D:/tmp/csi_price.html', 'r')
 html_str = f.read()
 f.close()
 html_str = unicode(html_str, 'gbk')
 
-#print html_str
+# print html_str
 
 from bs4 import BeautifulSoup
+
 soup = BeautifulSoup(html_str, 'html.parser')
 print soup.title
 print soup.find_all('div', attrs={"class": "f16b"})[0].text
 
+print max(14, 5, 66, 109, 2, 0, 9)
+
+from datetime import date
+
+bday = date(2016, 2, 8)
+age = date.today() - bday
+print age.days
