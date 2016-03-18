@@ -1,8 +1,10 @@
 #! D:/owendir/programs/Python275/pythonw.exe
 # digest demo
+from Tkinter import Tk
 import hashlib
 import getpass
 import sys
+import time
 
 
 def digest(input_str, alg_method):
@@ -19,7 +21,17 @@ if __name__ == "__main__":
     if sys.argv.__len__() >= 3:
         if sys.argv[2] == 'show':
             print(origin_text + ", " + alg)
-    print(digest(origin_text, alg))
+    hashed = digest(origin_text, alg)
+    # print(hashed)
+    # copy to clipboard
+    r = Tk()
+    r.withdraw()
+    r.clipboard_clear()
+    r.clipboard_append(hashed)
+    r.destroy()
+    print 'copied to clipboard'
     # waiting
-    print("Enter to exit")
-    raw_input()
+    # print("Enter to exit")
+    # raw_input()
+    time.sleep(0.1)
+    exit(0)
