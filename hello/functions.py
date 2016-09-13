@@ -11,3 +11,20 @@ def fibonacci(n=50):  # write Fibonacci series up to n
 # (unless named in a global statement), although they may be referenced.
 fibonacci()
 fibonacci(20)
+
+# testing
+def length_may_be(lst, *lens):
+    length = len(lst)
+    if len(lens) == 1:
+        if length > int(lens[0]):
+            print 'expect {0}, but received {1}'.format(lens[0], length)
+    elif lens.count(str(length)) == 0:
+        print ("list length {0} is not right!".format(length))
+    else:
+        print 'good'
+
+molist = ['create','update']
+molist.append('delete')
+lens = ['1','2','4']
+print(len(molist))
+length_may_be(molist, '5')

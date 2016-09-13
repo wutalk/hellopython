@@ -16,7 +16,7 @@ print(squares)
 a, b = 0, 1
 while b < 20:
     print(b),
-    a,b=b,a+b
+    a, b = b, a + b
     # t=b
     # b=a+b
     # a = t
@@ -33,4 +33,4 @@ if x > 5:
 else:
     print("<=5")
 
-print(range(5,10,2))
+print(range(5, 10, 2))
