@@ -13,6 +13,19 @@ def digest(input_str, alg_method):
     return h.hexdigest()
 
 
+def upper_by(str, step):
+    ori_list = list(str)
+    new_list = []
+    index = 0
+    for ele in ori_list:
+        if index % step == 0:
+            new_list.append(ele.upper())
+        else:
+            new_list.append(ele)
+        index += 1
+    return ''.join(new_list)
+
+
 if __name__ == "__main__":
     alg = 'sha1'
     if sys.argv.__len__() >= 2:
@@ -22,6 +35,7 @@ if __name__ == "__main__":
         if sys.argv[2] == 'show':
             print(origin_text + ", " + alg)
     hashed = digest(origin_text, alg)
+    hashed = upper_by(hashed, 3)
     # print(hashed)
     # copy to clipboard
     r = Tk()
