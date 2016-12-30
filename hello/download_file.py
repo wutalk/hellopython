@@ -1,4 +1,4 @@
-﻿# import urllib
+﻿import urllib
 import time
 from datetime import date
 
