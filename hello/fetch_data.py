@@ -1,5 +1,6 @@
 import urllib
 import urllib2
+from bs4 import BeautifulSoup
 
 url = 'http://home.baidu.com/2016-03-01/1464746500.html'
 user_agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64)'
@@ -15,5 +16,10 @@ the_page = response.read()
 response.close()
 
 html = unicode(the_page, 'gbk')#.encode('utf-8')
+soup = BeautifulSoup(html, "html.parser")
+# print html
+print(soup.title.string)
 
-print html
+
+
+print('end')

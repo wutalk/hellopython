@@ -1,7 +1,10 @@
+import numpy as np
+import pandas as pd
+import bisect
+from datetime import timedelta
+
 print("hello world")
 # -*- coding: iso-8859-15 -*-
-currency = u"¤"
-print ord(currency)
 
 word = 'Python'
 print word[0:2]
@@ -34,3 +37,13 @@ else:
     print("<=5")
 
 print(range(5, 10, 2))
+
+today = pd.datetime.today()
+td = timedelta(days=365 * 5)
+start = today - td
+
+for i in range(10):
+    print i
+    td = timedelta(days=30 * i)
+    start = today - td
+    print start

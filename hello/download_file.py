@@ -17,13 +17,18 @@ def download(fileCode):
     print 'saved to ' + f
 
 # 上证50 '000016.XSHG', 红利指数 '000015.XSHG', 中证红利 '000922.XSHG', 
-# 基本面50 '000925.XSHG', '000300.XSHG', '000905.XSHG'
+# 基本面50 '000925.XSHG', 沪深300 '000300.XSHG', 中证500 '000905.XSHG'
+# 中证主要消费 000932，中证医药 000933
 download('000015perf')
 download('000016perf')
 download('Csi922Perf')
+
 download('Csi925Perf')
 download('Csi300Perf')
 download('Csi905Perf')
+
+download('Csi932Perf')
+download('Csi933Perf')
 
 print 'download complete, exit within 2 seconds'
 time.sleep(2)
