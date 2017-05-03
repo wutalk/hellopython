@@ -10,7 +10,7 @@ proxies = {'ftp': 'http://10.144.1.10:8080/'}
 
 def download(fileCode):
     url = 'ftp://115.29.204.48/webdata/{}.xls'.format(fileCode)
-    f = 'D:/wutalk/portfolio/perf_data/{}_{}.xls'.format(fileCode, date.today())
+    f = 'D:/wutalk/Nutstore/portfolio/perf_data/{}_{}.xls'.format(fileCode, date.today())
     testfile = urllib.FancyURLopener(proxies)
     print 'start download ' + url + '...'
     testfile.retrieve(url, f)

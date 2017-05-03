@@ -51,8 +51,8 @@ print ', '.join(columns)
 
 if __name__ == "__main__":
     # 2016-12-30
-    hsi_pe = 10.65
-    hscei_pe = 7.23
+    hsi_pe = 13.63
+    hscei_pe = 8.45
     if sys.argv.__len__() >= 3:
         hsi_pe = float(sys.argv[1])
         hscei_pe = float(sys.argv[2])
