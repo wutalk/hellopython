@@ -1,3 +1,4 @@
 # please ignore these files
 .idea/
+*.pyc
 hello/auto_update_203_local.py

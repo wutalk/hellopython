@@ -2,7 +2,7 @@ import re
 
 from bs4 import BeautifulSoup
 
-f = open('D:/wutalk/Nutstore/ms-p-203.html', 'r')
+f = open('D:/wutalk/Nutstore/ms-p-203-v2.html', 'r')
 html = f.read()
 f.close()
 # html = unicode(html, 'gbk')
@@ -11,7 +11,7 @@ soup = BeautifulSoup(html, "html.parser")
 
 # print html
 
-def parse(soup):
+def parse(soup, out_file):
     pm_list = soup.select('div.pm_statistics')
     if len(pm_list) != 2:
         print 'data source format changed, exit...'
@@ -82,11 +82,11 @@ def parse(soup):
     print one_line[:-1]
     one_line += str(total_value) + ','
 
-    print 'start append one line to file'
-    f = open('D:/wutalk/security-privacy/ms-p-203_report.csv', 'a')
+    print 'start append one line to file %s' % out_file
+    f = open(out_file, 'a')
     f.write(one_line[:-1])
     f.write('\n')
     f.close()
     print 'complete append'
 
-# parse(soup)
+# parse(soup, out_file)
