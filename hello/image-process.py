@@ -11,7 +11,7 @@ parser.add_argument('-f', '--filter', action="store_true")
 args = parser.parse_args()
 
 fileName = 'owu_randomCode'
-fontPath = 'C:\\Windows\\Fonts\\'
+fontPath = 'D:/tmp/my-font/'
 
 font_colors = [(11, 11, 11), (28, 27, 22), (36, 36, 38), (45, 45, 53), (67, 65, 70), (99, 99, 99)]
 bg_color = (207, 172, 140)
@@ -42,7 +42,7 @@ def getCodePicture():
     readlines = input.readlines()
     print len(readlines)
     # font = ImageFont.truetype(fontPath + 'fznht.ttf', 48)
-    font = ImageFont.truetype('D:/tmp/liugongquant.ttf', 48)
+    font = ImageFont.truetype(fontPath + 'liugongquant.ttf', 48)
     w, h = font.getsize(u'柳')
     count = width / w - 1
     y_text = 40
@@ -75,7 +75,7 @@ def getCodePicture():
         y_text += 20
 
     # tail
-    font = ImageFont.truetype('D:/tmp/liugongquant.ttf', 32)
+    font = ImageFont.truetype(fontPath + 'liugongquant.ttf', 32)
     w, h = font.getsize(tail)
     draw.text((width - w - 40, img_ht - h * 2), tail, font=font, fill=getRandomColor())
     # fill noise
