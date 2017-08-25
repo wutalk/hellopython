@@ -1,10 +1,11 @@
 import codecs
 import cookielib
 import urllib2
+import time
 
 from bs4 import BeautifulSoup
 
-tmp_dir = 'D:/tmp/'
+tmp_dir = 'D:/tmp/tfna/'
 
 base_url = 'https://cd.lianjia.com/chengjiao/tianfuxinqu/'
 
@@ -21,7 +22,7 @@ def download_file(idx):
     print resp.headers['content-type']
     the_page = resp.read()
     html = unicode(the_page, 'utf-8')  # .encode('utf-8')
-    print html
+    # print html
     # with open(tmp_dir + "forum-97-4.html", "w") as pom_file:
     #     pom_file.write(html)
     with codecs.open(tmp_dir + page + ".html", "w", "utf-8") as temp:
@@ -76,38 +77,51 @@ def get_parsed_line(hs):
     gp_cj_gap = float(guapai_price) - float(total_price)
     line.append(str(gp_cj_gap))
 
-    cj_zhouqi = cj.select_one('div.dealCycleeInfo span.dealCycleTxt span:nth-of-type(2)').get_text()
-    # print cj_zhouqi
-    st = cj_zhouqi.index(u'\u671f') + 1
-    ed = cj_zhouqi.index(u'\u5929')
-    cj_cycle = cj_zhouqi[st:ed]
+    cj_cycle = 'na'
+    cj_zq_item = cj.select_one('div.dealCycleeInfo span.dealCycleTxt span:nth-of-type(2)')
+    if (cj_zq_item != None):
+        cj_zhouqi = cj_zq_item.get_text()
+        # print cj_zhouqi
+        st = cj_zhouqi.index(u'\u671f') + 1
+        ed = cj_zhouqi.index(u'\u5929')
+        cj_cycle = cj_zhouqi[st:ed]
     # print cj_cycle
     line.append(cj_cycle)
 
-    print ','.join(line)
+    # print ','.join(line)
     return line
 
 
 if __name__ == '__main__':
-    # download_file(1)
-    print 'page saved'
+    exit(0)
 
-    # list page
-    page = 'pg1'
-    page_path = tmp_dir + page + ".html"
+    out_file = tmp_dir + "lj_cj_data-tfna.csv"
+    with codecs.open(out_file, "a", "utf-8") as f:
+        for i in range(11, 101):
+            time.sleep(1)
+            print '#### processing pg' + str(i)
+            download_file(str(i))
+            print 'page saved'
 
-    html_page = open(page_path, 'r')
-    # print html_page
-    soup = BeautifulSoup(html_page, "html.parser")
-    # print(soup.title.string)
+            # list page
+            page = 'pg' + str(i)
+            page_path = tmp_dir + page + ".html"
 
-    house_list = soup.select('ul.listContent li')
-    print len(house_list)
+            html_page = open(page_path, 'r')
+            # print html_page
+            soup = BeautifulSoup(html_page, "html.parser")
+            # print(soup.title.string)
 
-    # hs = house_list[0]
-    # get_parsed_line(hs)
+            house_list = soup.select('ul.listContent li')
+            print len(house_list)
 
-    for hs in house_list:
-        get_parsed_line(hs)
-        break
+            # hs = house_list[0]
+            # get_parsed_line(hs)
+
+            for hs in house_list:
+                line = get_parsed_line(hs)
+                # print ','.join(line)
+                f.write(','.join(line))
+                f.write('\r\n')
+                # break
     print 'end'

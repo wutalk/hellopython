@@ -8,9 +8,9 @@ from bs4 import BeautifulSoup
 tmp_dir = 'D:/tmp/ishuiku/'
 host = 'http://www.ishuiku.com/'
 list_page_template = 'forum-97-{idx}.html'
-result_file = 'ishuiku-11-20.txt'
+result_file = 'ishuiku-41-50.txt'
 
-for i in range(12, 21):
+for i in range(46, 51):
     time.sleep(0.5)
     page_link = list_page_template.replace('{idx}', str(i))
     print 'processing ' + page_link
