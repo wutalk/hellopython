@@ -5,9 +5,9 @@ import time
 
 from bs4 import BeautifulSoup
 
-tmp_dir = 'D:/tmp/tfna/'
+tmp_dir = 'D:/tmp/lianjia-data/dafeng/'
 
-base_url = 'https://cd.lianjia.com/chengjiao/tianfuxinqu/'
+base_url = 'https://cd.lianjia.com/chengjiao/dafeng/'
 
 
 # page = 'pg1'
@@ -93,11 +93,11 @@ def get_parsed_line(hs):
 
 
 if __name__ == '__main__':
-    exit(0)
+    # exit(0)
 
-    out_file = tmp_dir + "lj_cj_data-tfna.csv"
+    out_file = tmp_dir + "lj_cj_data-dafeng.csv"
     with codecs.open(out_file, "a", "utf-8") as f:
-        for i in range(11, 101):
+        for i in range(1, 2):
             time.sleep(1)
             print '#### processing pg' + str(i)
             download_file(str(i))

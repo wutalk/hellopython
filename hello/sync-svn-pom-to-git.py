@@ -40,9 +40,9 @@ for git_if in git_props.children:
 for msg in commit_msg:
     print msg
 print '%s interfaces changed' % len(commit_msg)
-print ', '.join(commit_msg)
 
 if len(commit_msg) > 0:
+    print '%FIN IWI: ' + ', '.join(commit_msg)
     formatter = xmlformatter.Formatter(indent="4", indent_char=" ", encoding_output="utf-8", preserve=["literal"])
     with open(git_dir + "pom.xml", "wb") as pom_file:
         pom_file.write(formatter.format_string(str(git_soup)))
