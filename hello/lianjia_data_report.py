@@ -5,7 +5,7 @@ import time
 
 from bs4 import BeautifulSoup
 
-tmp_dir = 'D:/tmp/lianjia-data/dafeng/'
+tmp_dir = 'D:/data/lianjia/dafeng/'
 
 base_url = 'https://cd.lianjia.com/chengjiao/dafeng/'
 
@@ -93,7 +93,8 @@ def get_parsed_line(hs):
 
 
 if __name__ == '__main__':
-    # exit(0)
+    download_file("1")
+    exit(0)
 
     out_file = tmp_dir + "lj_cj_data-dafeng.csv"
     with codecs.open(out_file, "a", "utf-8") as f:
