@@ -1,6 +1,7 @@
 import codecs
 import cookielib
 import urllib2
+import os.path
 
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -82,6 +83,9 @@ def append_to_file(data_list):
 if __name__ == '__main__':
     # exit(0)
     page = download_file()
+    if not os.path.isfile(tmp_dir + page):
+        print 'download file fail, retry one'
+        page = download_file()
     # page = 'cdfgj_cj_2018-05-15.html'
     item_list = parse_page(page)
     print 'processed %s' % page

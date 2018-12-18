@@ -56,7 +56,7 @@ if __name__ == '__main__':
     html_page = open(page, 'r')
     # print html_page
     soup = BeautifulSoup(html_page, "html.parser")
-    print(soup.title.string)
+    print soup.title.string
 
     lk_list = get_link_list(soup)
     # for lk in lk_list:
@@ -68,14 +68,17 @@ if __name__ == '__main__':
     i = 1
     for line in line_list:
         # print line.get_text()
+        print '------------'
         print line.select_one('dt').get_text()
         item_list = line.select('a')
+        print "sub item %s" % len(item_list)
         for item in item_list:
             name = item.select_one('span.name').get_text()
             cnt = item.select_one('span.cnt').get_text()
             item_return.append((name, cnt))
+            print name, cnt
         print i
         if ++i > 2:
             break
-    print item_return
+    # print item_return.join(', ')
     print 'end'
