@@ -8,7 +8,9 @@ from bs4 import BeautifulSoup
 
 tmp_dir = 'D:/data/cdfgj-data/'
 
-base_url = 'http://www.cdfgj.gov.cn/SCXX/Default.aspx'
+# base_url = 'http://www.cdfgj.gov.cn/SCXX/Default.aspx'
+# base_url = 'http://fgj.chengdu.gov.cn/cdsfgj/jsjy/jsjy.shtml'
+base_url = 'https://www.cdfgj.gov.cn/SCXX/Default.aspx?action=ucEveryday'
 
 page = ""
 
@@ -38,6 +40,7 @@ def parse_page(page):
     html_page = open(page_path, 'r')
     soup = BeautifulSoup(html_page, "html.parser")
     # print(soup.title.string)
+    # print soup
 
     house_list = soup.select('div.rightContent > table')
     print len(house_list)
@@ -86,7 +89,7 @@ if __name__ == '__main__':
     if not os.path.isfile(tmp_dir + page):
         print 'download file fail, retry one'
         page = download_file()
-    # page = 'cdfgj_cj_2018-05-15.html'
+    page = 'cdfgj_cj_2019-02-22.html'
     item_list = parse_page(page)
     print 'processed %s' % page
     append_to_file(item_list)
