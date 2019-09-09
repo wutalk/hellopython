@@ -1,9 +1,13 @@
+import random
 import codecs
 import cookielib
 import os.path
+import time
 import urllib2
+import logging
 
 import pandas as pd
+import sys
 from bs4 import BeautifulSoup
 
 tmp_dir = 'D:/data/cdfgj-data/'
@@ -15,9 +19,17 @@ base_url = 'https://zw.cdzj.chengdu.gov.cn/py/SCXX/Default.aspx?action=ucEveryda
 
 page = ""
 
+logger = logging.getLogger('cdfgj')
+hdlr = logging.FileHandler('D:/userdata/owu/Desktop/cdfgj.log')
+# hdlr = logging.StreamHandler(stream=sys.stdout)
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+hdlr.setFormatter(formatter)
+logger.addHandler(hdlr)
+logger.setLevel(logging.DEBUG)
+
 
 def download_file():
-    print 'start download file from %s' % base_url
+    logger.info('start download file from %s' % base_url)
     today = pd.datetime.today()
     today = today.strftime('%Y-%m-%d')
     # example cdfgj_cj_2017-12-20.html
@@ -29,13 +41,13 @@ def download_file():
                          ('Accept',
                           'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3')]
     resp = opener.open(base_url)
-    print resp.headers['content-type']
+    # print resp.headers['content-type']
     the_page = resp.read()
     html = unicode(the_page, 'utf-8')  # .encode('utf-8')
     # print html
     with codecs.open(tmp_dir + save_page, "w", "utf-8") as temp:
         temp.write(html)
-    print 'downloaded %s' % save_page
+        logger.info('downloaded %s' % save_page)
     return save_page
 
 
@@ -49,7 +61,7 @@ def parse_page(page):
     # print soup
 
     house_list = soup.select('div.rightContent > table')
-    print len(house_list)
+    logger.debug(len(house_list))
 
     print '------yishou--------'
     data_list = []
@@ -80,14 +92,14 @@ def parse_table(house_list, new_ershou, date_str):
 
 
 def append_to_file(data_list):
-    print 'start write to file'
+    logger.info('start write to file')
     out_file = tmp_dir + "cdfgj_cj_data.csv"
     with codecs.open(out_file, "a", "utf-8") as f:
         for line in data_list:
             # print line
             f.write(line)
             f.write('\r\n')
-    print 'complete append %s lines to file' % len(data_list)
+    logger.info('complete append %s lines to file' % len(data_list))
 
 
 def get_date_from_page_name(page):
@@ -99,10 +111,13 @@ def get_date_from_page_name(page):
 if __name__ == '__main__':
     # exit(0)
     page = download_file()
-    if not os.path.isfile(tmp_dir + page):
-        print 'download file fail, retry one'
+    i = 0
+    while i < 5 and not os.path.isfile(tmp_dir + page):
+        i += 1
+        time.sleep(20 + random.randint(1, 10))
+        logger.info('download file fail, retry #%s' % i)
         page = download_file()
     # page = 'cdfgj_cj_2019-02-22.html'
     item_list = parse_page(page)
-    print 'processed %s' % page
+    logger.info('processed %s' % page)
     append_to_file(item_list)
