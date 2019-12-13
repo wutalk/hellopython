@@ -1,3 +1,4 @@
+#! D:/owendir/programs/Python38/pythonw.exe
 import json
 import os
 import subprocess

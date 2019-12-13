@@ -1,15 +1,17 @@
-#! D:/owendir/programs/Python275/pythonw.exe
+#! D:/owendir/programs/Python38/pythonw.exe
 # digest demo
-from Tkinter import Tk
-import hashlib
+# from tkinter import Tk
 import getpass
+import hashlib
 import sys
 import time
+
+import pyperclip
 
 
 def digest(input_str, alg_method):
     h = hashlib.new(alg_method)
-    h.update(input_str)
+    h.update(input_str.encode('utf-8'))
     return h.hexdigest()
 
 
@@ -38,12 +40,13 @@ if __name__ == "__main__":
     hashed = upper_by(hashed, 3)
     # print(hashed)
     # copy to clipboard
-    r = Tk()
-    r.withdraw()
-    r.clipboard_clear()
-    r.clipboard_append(hashed)
-    r.destroy()
-    print 'copied to clipboard'
+    # r = Tk()
+    # r.withdraw()
+    # r.clipboard_clear()
+    # r.clipboard_append(hashed)
+    # r.destroy()
+    pyperclip.copy(hashed)
+    print('copied to clipboard')
     # waiting
     # print("Enter to exit")
     # raw_input()
